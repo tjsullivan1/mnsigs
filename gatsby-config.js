@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Greater Minnesota Alumni Chapter`,
     description: `A chartered alumni organization of the Sigma Chi International Fraternity.`,
-    author: `@SullivanTim`,
+    author: `@gatsbyjs`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
