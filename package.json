@@ -1,29 +1,45 @@
 {
-  "private": false,
-  "name": "example-company-website-gatsby-sanity-combo",
-  "version": "1.0.0",
-  "author": "Sanity <hello@sanity.io>",
-  "engines": {
-    "node": "10.x"
-  },
-  "scripts": {
-    "clean": "lerna clean",
-    "deploy": "lerna run deploy",
-    "empty-cache": "lerna run empty-cache",
-    "init": "cd studio && sanity init && lerna run graphql-deploy",
-    "format": "lerna run format",
-    "graphql-deploy": "lerna run graphql-deploy",
-    "lint": "lerna run lint",
-    "now-deploy": "now && now alias",
-    "workers-start": "lerna run workers-start",
-    "workers-deploy": "lerna run workers-deploy",
-    "postinstall": "lerna bootstrap",
-    "sanity-deploy": "lerna run sanity-deploy",
-    "start": "lerna run empty-cache && lerna run start --parallel",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "gatsby-starter-default",
+  "private": true,
+  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "version": "0.1.0",
+  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "dependencies": {
+    "gatsby": "^3.6.2",
+    "gatsby-plugin-gatsby-cloud": "^2.6.1",
+    "gatsby-plugin-image": "^1.6.0",
+    "gatsby-plugin-manifest": "^3.6.0",
+    "gatsby-plugin-offline": "^4.6.0",
+    "gatsby-plugin-react-helmet": "^4.6.0",
+    "gatsby-plugin-sharp": "^3.6.0",
+    "gatsby-source-filesystem": "^3.6.0",
+    "gatsby-transformer-sharp": "^3.6.0",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0"
   },
   "devDependencies": {
-    "lerna": "^3.14.1",
-    "rimraf": "^2.6.3"
+    "prettier": "2.2.1"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "0BSD",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+  },
+  "bugs": {
+    "url": "https://github.com/gatsbyjs/gatsby/issues"
   }
 }
