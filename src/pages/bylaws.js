@@ -8,12 +8,12 @@ const BylawsPage = () => (
   <Layout>
     <SEO title="Bylaws" />
     <div>
-    <h1>Sigma Chi Fraternity's Greater Minnesota Alumni Association Bylaws</h1>
+    <h1>Sigma Chi Fraternity's Greater Minnesota Alumni Chapter Bylaws</h1>
 
 <h2 id="preamble">PREAMBLE<a href="#preamble" class="link"></a></h2>
 
 <p>Believing that where there is law there is liberty, we the members of the <strong>Greater Minnesota</strong> Alumni
-    Association of the
+    Chapter of the
     Sigma Chi Fraternity do hereby establish and solemnly promise to obey these bylaws to supplement and support the
     Ritual, Constitution, Statutes and Executive Committee Regulations of the Sigma Chi Fraternity for the government of
     our organization.</p>
@@ -23,7 +23,7 @@ const BylawsPage = () => (
 <h3 id="a1s1">Section 1 Name<a href="#a1s1" class="link"></a></h3>
 
 <ol type="A">
-    <li>The name of this organization shall be the <strong>Greater Minnesota</strong> Alumni Association of the Sigma
+    <li>The name of this organization shall be the <strong>Greater Minnesota</strong> Alumni Chapter of the Sigma
         Chi Fraternity.
     </li>
 </ol>
