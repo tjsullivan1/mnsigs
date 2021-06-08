@@ -31,7 +31,7 @@ const AboutPage = () => (
     </ul>
 </ol>
      <Link to="https://www.sigmachi.org">Learn more about Sigma Chi</Link>
-     // <!-- #TODO: Find the actual link for a search for this. If it doesn't exist, talk to James Jones about building one. -->
+     {/* // #TODO: Find the actual link for a search for this. If it doesn't exist, talk to James Jones about building one. */}
      <Link to="https://www.sigmachi.org/alumnichapters">Find an alumni chapter in your area!</Link>
     <Link to="/">Go back to the homepage</Link>
   </Layout>
