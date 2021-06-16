@@ -7,7 +7,7 @@ import SEO from "../components/seo"
 const ContactPage = () => (
   <Layout>
     <SEO title="Contact" />
-    <form method="post" action="#">
+    <form method="post" action="https://mnsigs-contact.azurewebsites.net/api/contact?code=DC287c4iya8GoR0KlNNbA/qa7iL6Qhv39ZN57NqtV7rGMKEhHoD/vA==">
       <label>
         Name
         <input type="text" name="name" id="name" />
