@@ -598,3 +598,5 @@ pre tt:after {
     font-size: 100%;
   }
 }
+
+label { display:block }
