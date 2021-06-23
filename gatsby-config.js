@@ -3,6 +3,24 @@ module.exports = {
     title: `Greater Minnesota Alumni Chapter`,
     description: `A chartered alumni organization of the Sigma Chi International Fraternity.`,
     author: `@gatsbyjs`,
+    menuLinks:[
+      {
+        name:'Home',
+        link:'/'
+      },
+      {
+        name:'About',
+        link:'/about'       
+      },
+      {
+        name:'Bylaws',
+        link:'/bylaws'
+      },
+      {
+        name:'Contact',
+        link:'/contact'
+      }
+    ]
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
