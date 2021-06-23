@@ -10,16 +10,10 @@ const IndexPage = () => (
     <Seo title="Home" />
     <h1>Welcome to the home of the Greater Minnesota Alumni Chapter</h1>
     <p>This site will host content about us, as well as applications built to support our operations.</p>
-    <StaticImage
-      src="../images/gatsby-astronaut.png"
-      width={300}
-      quality={95}
-      formats={["AUTO", "WEBP", "AVIF"]}
-      alt="A Gatsby astronaut"
-      style={{ marginBottom: `1.45rem` }}
-    />
     <p>
      <Link to="/about/">About us</Link> <br />
+     <Link to="/bylaws/">Our bylaws</Link> <br />
+     <Link to="/contact/">Contact us</Link> <br />
     </p>
   </Layout>
 )
