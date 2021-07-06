@@ -9,9 +9,9 @@ const GalleryPage = () => (
     <Layout>        
         <SEO title="Gallery" />
         <div class="gallery">
-        <a target="_blank" href="../images/dj_harrelson_phillips.jpg">
+        <a target="_blank" href="https://samnsigs001.blob.core.windows.net/media/photos/dj_harrelson_philips.jpg">
             <StaticImage
-            src="../images/dj_harrelson_phillips.jpg"
+            src="https://samnsigs001.blob.core.windows.net/media/photos/dj_harrelson_philips.jpg"
             width={600}
             quality={400}
             formats={["AUTO", "WEBP", "AVIF"]}
@@ -22,9 +22,9 @@ const GalleryPage = () => (
         <div class="desc">Brother DJ Gries (Greater Minnesota Alumni Chapter President, 2021-2023) with Significant Sigs Woody Harrelson and Rep. Dean Phillips</div>
         </div>
         <div class="gallery">
-        <a target="_blank" href="../images/gc_2021.jpg">
+        <a target="_blank" href="https://samnsigs001.blob.core.windows.net/media/photos/gc_2021.jpg">
         <StaticImage
-            src="../images/gc_2021.jpg"
+            src="https://samnsigs001.blob.core.windows.net/media/photos/gc_2021.jpg"
             width={600}
             quality={400}
             formats={["AUTO", "WEBP", "AVIF"]}
@@ -35,9 +35,9 @@ const GalleryPage = () => (
         <div class="desc">Brothers at the 83rd Grand Chapter in Phoenix</div>
         </div>
         <div class="gallery">
-        <a target="_blank" href="../images/province_2020.jpg">
+        <a target="_blank" href="https://samnsigs001.blob.core.windows.net/media/photos/province-2020.jpg">
         <StaticImage
-            src="../images/province_2020.jpg"
+            src="https://samnsigs001.blob.core.windows.net/media/photos/province-2020.jpg"
             width={600}
             quality={400}
             formats={["AUTO", "WEBP", "AVIF"]}
