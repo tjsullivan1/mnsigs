@@ -47,13 +47,6 @@ const Header = ({ siteTitle, menuLinks }) => (
           </nav>
         </div>
     </div>
-    <div class="navbar">
-      <ul>
-        <li><Link to="/about/">About us</Link></li>
-        <li><Link to="/bylaws/">Our bylaws</Link></li>
-        <li><Link to="/contact/">Contact us</Link></li>
-     </ul>
-    </div>
   </header>
 )
 
