@@ -38,7 +38,7 @@ const Header = ({ siteTitle, menuLinks }) => (
                     padding: `1rem`,
                   }}
                 >
-                  <Link style={} to={link.link}>
+                  <Link to={link.link}>
                     {link.name}
                   </Link>
                 </li>
