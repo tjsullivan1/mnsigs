@@ -27,6 +27,29 @@ const GalleryPage = () => (
         </a>
         <div class="desc">Brothers after the 2020 North Central Province Conference</div>
         </div>
+        <div class="gallery">
+        <a target="_blank" href="https://samnsigs001.blob.core.windows.net/media/photos/barnard-phillips-harrelson.jpg">
+            <img src="https://samnsigs001.blob.core.windows.net/media/photos/barnard-phillips-harrelson.jpg" alt="" width="600" height="400" />
+        </a>
+        <div class="desc"></div>
+        </div>
+
+
+        <div class="gallery">
+        <a target="_blank" href="https://samnsigs001.blob.core.windows.net/media/photos/cake.jpg">
+            <img src="https://samnsigs001.blob.core.windows.net/media/photos/cake.jpg" alt="" width="600" height="400" />
+        </a>
+        <div class="desc"></div>
+        </div>
+
+
+        <div class="gallery">
+        <a target="_blank" href="https://samnsigs001.blob.core.windows.net/media/photos/chrsitmas-party.jpg">
+            <img src="https://samnsigs001.blob.core.windows.net/media/photos/chrsitmas-party.jpg" alt="" width="600" height="400" />
+        </a>
+        <div class="desc"></div>
+        </div>
+
         <Link to="/">Go back to the homepage</Link>
     </Layout>
 )
