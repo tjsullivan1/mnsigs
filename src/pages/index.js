@@ -9,8 +9,8 @@ const IndexPage = () => (
   <Layout>
     <Seo title="Home" />
 
-    <h1>Welcome to the home of the Greater Minnesota Alumni Chapter</h1>
-    <p>This site will host content about us, as well as applications built to support our operations.</p>
+    <h1 class="center">Welcome to the home of the Greater Minnesota Alumni Chapter</h1><br/>
+    <p>This site will host content about us, as well as applications built to support our operations.</p><br/>
 
   </Layout>
 )

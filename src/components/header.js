@@ -33,12 +33,9 @@ const Header = ({ siteTitle, menuLinks }) => (
               {menuLinks.map(link => (
                 <li
                   key={link.name}
-                  style={{
-                    listStyleType: `none`,
-                    padding: `1rem`,
-                  }}
+                  class="headerLink"
                 >
-                  <Link to={link.link}>
+                  <Link to={link.link} style={{ backgroundColor: link.name === "Home"? '#8e949e': 'none'}}>
                     {link.name}
                   </Link>
                 </li>
