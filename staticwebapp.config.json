@@ -29,8 +29,7 @@
         "allowedRoles": ["authenticated"]
       },
       {
-        "route": "/login",
-        "rewrite": "login.html"
+        "route": "/login"
       },
       {
         "route": "/logout",
