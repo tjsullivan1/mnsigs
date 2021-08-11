@@ -5,7 +5,7 @@ import { StaticImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-const IndexPage = () => (
+const LoginPage = () => (
   <Layout>
     <Seo title="login" />
 
@@ -16,7 +16,9 @@ const IndexPage = () => (
         <li><Link to="https://mnsigs.com/.auth/login/twitter" class="overrideLiAInteraction">Login with Twitter</Link></li>
     </ul>
 
+    <p>If you have not yet registered, please send a message through the contact page above.</p>
+
   </Layout>
 )
 
-export default IndexPage
+export default LoginPage

@@ -26,6 +26,9 @@ module.exports = {
       },
       { name: 'Officers',
         link:'/officers'
+      },
+      { name: 'Login',
+        link:'/login'
       }
     ]
   },
