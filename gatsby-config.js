@@ -14,7 +14,7 @@ module.exports = {
       },
       {
         name:'Bylaws',
-        link:'/bylaws'
+        link:'/members/bylaws'
       },
       {
         name:'Contact',

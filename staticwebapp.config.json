@@ -9,6 +9,10 @@
         "allowedRoles": ["administrator"]
       },
       {
+        "route": "/members/*",
+        "allowedRoles": ["member"]
+      },
+      {
         "route": "/images/*",
         "headers": {
           "cache-control": "must-revalidate, max-age=15770000"
