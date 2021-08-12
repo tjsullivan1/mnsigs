@@ -7,7 +7,8 @@ import SEO from "../../components/seo"
 const MinutesPage = () => (
   <Layout>
     <SEO title="Minutes" />
-    <a href="{process.env.GATSBY_URL_1}" class="overrideLiAInteraction">Test File</a>
+    <a href="{process.env.GATSBY_URL_1}" class="overrideLiAInteraction">Test File 3</a>
+    <p>Hello, {process.env.GATSBY_URL_1}</p>
   </Layout>
 )
 
