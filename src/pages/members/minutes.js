@@ -9,7 +9,7 @@ const MinutesPage = () => (
     <SEO title="Minutes" />
     <p>Here are the chapter minutes...</p>
     <a href="{process.env.GATSBY_URL_1}" class="overrideLiAInteraction">Test File 3</a>
-    <p>Hello, {process.env.GATSBY_URL_1}</p>
+    <p>Hello, {process.env.GATSBY_URL_1}, what about {process.env.NODE_ENV}</p>
   </Layout>
 )
 
