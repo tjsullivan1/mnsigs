@@ -18,6 +18,14 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
+      - name: Create .env file
+        shell: bash
+        run: |
+          touch .env.production
+          echo 'GATSBY_TEST="THIS IS A TEST"'
+          echo $DOTENV >> .env.production
+        env:
+          DOTENV: ${{ secrets.dotenv }} 
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
