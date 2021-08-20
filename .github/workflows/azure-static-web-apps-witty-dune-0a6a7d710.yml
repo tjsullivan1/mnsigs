@@ -18,14 +18,30 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Create .env file
-        shell: bash
-        run: |
-          touch .env.production
-          echo 'GATSBY_TEST="THIS IS A TEST"'
-          echo $DOTENV >> .env.production
-        env:
-          DOTENV: ${{ secrets.dotenv }} 
+      - name: Login via Az module
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS_STORAGE }}
+          enable-AzPSSession: true
+      - name: Set the links in the minutes page
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            $ctx = New-AzStorageContext -StorageAccountName samnsigs001 -UseConnectedAccount
+
+            Get-AzStorageBlob -Context $ctx -Container members-content | % { 
+                $name = $_.name
+                $sas = New-AzStorageBlobSASToken -Blob $name -Permission r -Container members-content -context $ctx -FullUri
+                $string = "<a href='$sas'>$name</a><br />`n"; Add-Content -Value $string -Path tmp.txt 
+            }
+
+            $content = gc .\src\pages\members\minutes.js
+            $new = gc .\tmp.txt
+
+            $new_minutes_js = $content -replace '###LINK_INSERTS###', $new
+
+            $new_minutes_js | out-file -FilePath ".\src\pages\members\minutes.js"
+          azPSVersion: "latest"
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
