@@ -8,6 +8,7 @@ const ContactPage = () => (
   <Layout>
     <SEO title="Contact" />
     <h1 class="center">Questions or Comments? Let us know!</h1><br />
+    <h3>Send us a message</h3>
     <form method="post" action="https://mnsigs-contact.azurewebsites.net/api/contact?code=DC287c4iya8GoR0KlNNbA/qa7iL6Qhv39ZN57NqtV7rGMKEhHoD/vA==">
         <label>Name <strong style={{ color:'red' }}>*</strong></label>
         <input type="text" name="name" id="name" />
