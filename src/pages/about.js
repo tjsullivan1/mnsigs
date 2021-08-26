@@ -34,6 +34,18 @@ const AboutPage = () => (
     </ol>
 
     <br/><hr/>
+
+    <h1 class="center">Donate</h1>
+
+    <p>If you would like to make a monetary donation to our chapter, please use the link below. Please note, this is <b>not</b> intended for dues payments. If you need to pay your dues, please reach out to the treasurer.</p>
+    <form action="https://www.paypal.com/donate" method="post" target="_top">
+        <input type="hidden" name="hosted_button_id" value="G6JF8K99ZSUN4" />
+        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+        <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+    </form>
+
+
+    <br/><hr/>
     <h1 class="center">Get Involved</h1>
     <ul>
         <li><Link to="https://www.sigmachi.org" class="overrideLiAInteraction">Learn more about Sigma Chi</Link></li>
