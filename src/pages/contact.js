@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Link } from "gatsby"
+import MailChimpForm from "../components/mailchimp"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -7,6 +8,8 @@ import SEO from "../components/seo"
 const ContactPage = () => (
   <Layout>
     <SEO title="Contact" />
+    <h1 class="center">Subscribe to our mailing list!</h1><br />
+      <MailChimpForm/>
     <h1 class="center">Questions or Comments? Let us know!</h1><br />
     <h3>Send us a message</h3>
     <form method="post" action="https://mnsigs-contact.azurewebsites.net/api/contact?code=DC287c4iya8GoR0KlNNbA/qa7iL6Qhv39ZN57NqtV7rGMKEhHoD/vA==">
