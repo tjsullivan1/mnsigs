@@ -6,7 +6,7 @@ import Seo from "../components/SEO"
 
 const OfficersPage = () => (
   <Layout>
-        <SEO title="Officers" />
+        <Seo title="Officers" />
         <h1 class="center">About our Officers</h1>
         <ul>
             <li>President</li>
