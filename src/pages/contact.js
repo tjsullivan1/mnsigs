@@ -2,8 +2,8 @@ import * as React from "react"
 import { Link } from "gatsby"
 import MailchimpForm from "../components/MailchimpForm"
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Layout from "../components/Layout"
+import Seo from "../components/SEO"
 
 const ContactPage = () => (
   <Layout>
