@@ -7,7 +7,7 @@ import Seo from "../components/SEO"
 
 const GalleryPage = () => (
     <Layout>
-        <SEO title="Gallery" />
+        <Seo title="Gallery" />
         <h1 class="center">Our Brothers</h1><br />
         <div class="row">
             <div class="col">

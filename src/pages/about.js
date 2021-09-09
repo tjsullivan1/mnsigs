@@ -6,7 +6,7 @@ import Seo from "../components/SEO"
 
 const AboutPage = () => (
   <Layout>
-    <SEO title="About" />
+    <Seo title="About" />
     <h1 class="center">About the Chapter</h1>
     <p>The Greater Minnesota Alumni Chapter was founded in 2019 as the Greater Minnesota Alumni Club. It received
        official recognition as an Association of the Sigma Chi Fraternity in October of 2019. In February of 2021, the

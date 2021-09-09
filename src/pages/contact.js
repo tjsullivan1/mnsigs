@@ -7,7 +7,7 @@ import Seo from "../components/SEO"
 
 const ContactPage = () => (
   <Layout>
-    <SEO title="Contact" />
+    <Seo title="Contact" />
     <h1 class="center">Subscribe to our mailing list!</h1><br />
       <MailchimpForm/>
     <h1 class="center">Questions or Comments? Let us know!</h1><br />
