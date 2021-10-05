@@ -142,6 +142,7 @@ const BylawsPage = () => (
             <li>The president shall vote only to break a tie.</li>
             <li>Any member of the alumni organization whose dues payments are not current will automatically lose his right to vote.</li>
             <li>Any decision of a committee may be overruled by a majority vote of the active organization.</li>
+            <li>The president may request a vote of the chapter by electronic means. If this is to be done, a message will be sent to voting members via the approved communication channels (i.e., Facebook and email) with instructions on how to vote. Voting must remain open for a minimum of 21 days.</li>
         </ol>
         <div class="center">
             <a href="#article3">To top of article</a> | <a href="#top">To Top</a>
