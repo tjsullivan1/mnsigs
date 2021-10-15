@@ -18,4 +18,4 @@ const cp2021IndexPage = () => (
   </Layout>
 )
 
-export default IndexPage
+export default cp2021IndexPage
