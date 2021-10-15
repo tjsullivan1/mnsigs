@@ -3,8 +3,8 @@ import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 
 import TicketForm from "../../components/Cp2021Form"
-import Layout from "../components/Layout"
-import Seo from "../components/SEO"
+import Layout from "../../components/Layout"
+import Seo from "../../components/SEO"
 
 const cp2021IndexPage = () => (
   <Layout>
