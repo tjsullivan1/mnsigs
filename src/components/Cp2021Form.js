@@ -1,6 +1,4 @@
-import classNames from "classnames"
-import React, { useState } from "react"
-import Button from "../components/Button"
+import React from "react"
 
 const TicketForm = () => {
 
@@ -13,17 +11,16 @@ const TicketForm = () => {
         <input type="hidden" name="cmd" value="_s-xclick"/>
         <input type="hidden" name="hosted_button_id" value="YMWG4VCWBA42Q"/>
         <table>
-        <tr><td><input type="hidden" name="on0" value="Attendee Type?"/>Attendee Type?</td></tr><tr><td><input
-          select name="os0">
+        <tr><td><input type="hidden" name="on0" value="Attendee Type?"/>Attendee Type?</td></tr><tr><td><select name="os0">
           <option value="Brother">Brother $55.00 USD</option>
           <option value="Dues Paying Member">Dues Paying Member $50.00 USD</option>
           <option value="Guest">Guest $55.00 USD</option>
-        </input> </td></tr>
+        </select> </td></tr>
         </table>
         <input type="hidden" name="currency_code" value="USD" />
         <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" />
         <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-    </form>
+      </form>
     </div>
   )
 }
