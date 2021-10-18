@@ -11,7 +11,7 @@ const cp2021IndexPage = () => (
     <Seo title="Christmas Party 2021!" />
 
     <h1 class="center">Get your tickets for the party today!</h1><br/>
-    <p>This site will host content about us, as well as applications built to support our operations.</p><br/>
+    <p>Please use the form below to purchase your tickets. Please select whether you are a dues paying member, brother, or guest. This is a rudimentary form, if you are a brother bringing a guest, please select your status and then change quantity to 2.</p><br/>
     <TicketForm />
 
 
