@@ -47,11 +47,11 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            $logicapp_rul = Get-AzLogicAppTriggerCallbackUrl -ResourceGroupName rg-mnsigs-gallery -Name mnsigs-uploader -TriggerName manual | select -ExpandProperty Value
+            $logicapp_url = Get-AzLogicAppTriggerCallbackUrl -ResourceGroupName rg-mnsigs-gallery -Name mnsigs-uploader -TriggerName manual | select -ExpandProperty Value
 
             $content = gc .\src\pages\members\uploads.js
 
-            $new_uploads_js = $content -replace '###REPLACE_WITH_LOGIC_APP_ENDPOINT###', $content
+            $new_uploads_js = $content -replace '###REPLACE_WITH_LOGIC_APP_ENDPOINT###', $logicapp_url
 
             $new_uploads_js | out-file -FilePath ".\src\pages\members\uploads.js"
           azPSVersion: "latest"
