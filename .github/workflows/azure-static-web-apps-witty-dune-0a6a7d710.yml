@@ -42,6 +42,20 @@ jobs:
 
             $new_minutes_js | out-file -FilePath ".\src\pages\members\minutes.js"
           azPSVersion: "latest"
+
+      - name: Set the LogicApp link in Uploads
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            $logicapp_rul = Get-AzLogicAppTriggerCallbackUrl -ResourceGroupName rg-mnsigs-gallery -Name mnsigs-uploader -TriggerName manual | select -ExpandProperty Value
+
+            $content = gc .\src\pages\members\uploads.js
+            $new = gc .\tmp2.txt
+
+            $new_minutes_js = $content -replace '###REPLACE_WITH_LOGIC_APP_ENDPOINT###', $new
+
+            $new_minutes_js | out-file -FilePath ".\src\pages\members\uploads.js"
+          azPSVersion: "latest"
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
