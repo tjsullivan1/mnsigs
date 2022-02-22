@@ -11,6 +11,7 @@ const LoginPage = () => (
 
     <h1 class="center">Login</h1>
     <ul>
+        <li><Link to="https://mnsigs.com/.auth/login/google" class="overrideLiAInteraction">Login with Google</Link></li>
         <li><Link to="https://mnsigs.com/.auth/login/aad" class="overrideLiAInteraction">Login with Email</Link></li>
         <li><Link to="https://mnsigs.com/.auth/login/github" class="overrideLiAInteraction">Login with GitHub</Link></li>
         <li><Link to="https://mnsigs.com/.auth/login/twitter" class="overrideLiAInteraction">Login with Twitter</Link></li>
