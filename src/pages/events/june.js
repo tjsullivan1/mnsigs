@@ -26,4 +26,4 @@ Doors at 5:30p, doors will close at 6:00p, if you can't make the ritual portion,
   </Layout>
 )
 
-export default cp2021IndexPage
+export default junePage
