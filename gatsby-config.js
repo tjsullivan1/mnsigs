@@ -27,6 +27,9 @@ module.exports = {
       { name: 'Officers',
         link:'/officers'
       },
+      { name: 'Events',
+        link:'/events'
+      },
       { name: 'Login',
         link:'/login'
       }
