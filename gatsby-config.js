@@ -10,28 +10,28 @@ module.exports = {
       },
       {
         name:'About',
-        link:'/about'       
+        link:'/about/'       
       },
       {
         name:'Bylaws',
-        link:'/members/bylaws'
+        link:'/members/bylaws/'
       },
       {
         name:'Contact',
-        link:'/contact'
+        link:'/contact/'
       },
       {
         name:'Gallery',
-        link:'/gallery'
+        link:'/gallery/'
       },
       { name: 'Officers',
-        link:'/officers'
+        link:'/officers/'
       },
       { name: 'Events',
-        link:'/events'
+        link:'/events/'
       },
       { name: 'Login',
-        link:'/login'
+        link:'/login/'
       }
     ]
   },
