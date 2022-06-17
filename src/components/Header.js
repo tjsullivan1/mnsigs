@@ -35,9 +35,10 @@ const Header = ({ siteTitle, menuLinks }) => (
                   key={link.name}
                   class="headerLink"
                 >
-                  <Link to={link.link} style={{ backgroundColor: link.name === "Home"? '#8e949e': 'none'}}>
+                  <a href={link.link}>{link.name}</a>
+                  {/* <Link to={link.link} style={{ backgroundColor: link.name === "Home"? '#8e949e': 'none'}}>
                     {link.name}
-                  </Link>
+                  </Link> */}
                 </li>
               ))}
             </ul>

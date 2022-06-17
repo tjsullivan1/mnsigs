@@ -1,6 +1,4 @@
 import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
 
 import TicketForm from "../../components/Cp2021Form"
 import Layout from "../../components/Layout"
