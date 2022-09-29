@@ -1,20 +1,22 @@
 import React from "react"
 
-const TicketForm = () => {
+const FlannelForm = () => {
 
   return (
     <div className="container py-12 lg:py-16">
       <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight tracking-tight">
-        Purchase your tickets today!
+        Purchase your shirt today!
       </h2>
       <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
         <input type="hidden" name="cmd" value="_s-xclick"/>
-        <input type="hidden" name="hosted_button_id" value="YMWG4VCWBA42Q"/>
+        <input type="hidden" name="hosted_button_id" value="RK9UUJJDGBG68" />
         <table>
-        <tr><td><input type="hidden" name="on0" value="Attendee Type?"/>Attendee Type?</td></tr><tr><td><select name="os0">
-          <option value="Brother">Brother $60.00 USD</option>
-          <option value="Dues Paying Member">Dues Paying Member $50.00 USD</option>
-          <option value="Guest">Guest $60.00 USD</option>
+        <tr><td><input type="hidden" name="on0" value="Sizes"/>Sizes</td></tr><tr><td><select name="os0">
+          <option value="S">S $75.00 USD</option>
+          <option value="M">M $75.00 USD</option>
+          <option value="L">L $75.00 USD</option>
+          <option value="XL">XL $75.00 USD</option>
+          <option value="XXL">XXL $75.00 USD</option>
         </select> </td></tr>
         </table>
         <input type="hidden" name="currency_code" value="USD" />
@@ -25,4 +27,5 @@ const TicketForm = () => {
   )
 }
 
-export default TicketForm
+export default FlannelForm
+
