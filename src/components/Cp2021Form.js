@@ -9,7 +9,7 @@ const TicketForm = () => {
       </h2>
       <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
         <input type="hidden" name="cmd" value="_s-xclick"/>
-        <input type="hidden" name="hosted_button_id" value="YMWG4VCWBA42Q"/>
+        <input type="hidden" name="hosted_button_id" value="FKDXDFJGCRK6L"/>
         <table>
         <tr><td><input type="hidden" name="on0" value="Attendee Type?"/>Attendee Type?</td></tr><tr><td><select name="os0">
           <option value="Brother">Brother $60.00 USD</option>
@@ -26,3 +26,4 @@ const TicketForm = () => {
 }
 
 export default TicketForm
+
