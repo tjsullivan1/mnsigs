@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import TicketForm from "../../components/cp2022Form"
+import TicketForm from "../../components/cp2021Form"
 import Layout from "../../components/Layout"
 import Seo from "../../components/SEO"
 
