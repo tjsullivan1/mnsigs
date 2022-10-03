@@ -12,9 +12,8 @@ const TicketForm = () => {
         <input type="hidden" name="hosted_button_id" value="FKDXDFJGCRK6L"/>
         <table>
         <tr><td><input type="hidden" name="on0" value="Attendee Type?"/>Attendee Type?</td></tr><tr><td><select name="os0">
-          <option value="Brother">Brother $60.00 USD</option>
-          <option value="Dues Paying Member">Dues Paying Member $50.00 USD</option>
-          <option value="Guest">Guest $60.00 USD</option>
+          <option value="Non-Dues Paying Member/Guest of Non-Dues Paying Member">Non-Dues Paying Member/Guest of Non-Dues Paying Member $50.00 USD</option>
+	        <option value="Dues Paying Member/Guest of Dues Paying Member">Dues Paying Member/Guest of Dues Paying Member $40.00 USD</option>
         </select> </td></tr>
         </table>
         <input type="hidden" name="currency_code" value="USD" />

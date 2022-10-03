@@ -12,11 +12,11 @@ const FlannelForm = () => {
         <input type="hidden" name="hosted_button_id" value="RK9UUJJDGBG68" />
         <table>
         <tr><td><input type="hidden" name="on0" value="Sizes"/>Sizes</td></tr><tr><td><select name="os0">
-          <option value="S">S $75.00 USD</option>
-          <option value="M">M $75.00 USD</option>
-          <option value="L">L $75.00 USD</option>
-          <option value="XL">XL $75.00 USD</option>
-          <option value="XXL">XXL $75.00 USD</option>
+        <option value="S">S $60.00 USD</option>
+        <option value="M">M $60.00 USD</option>
+        <option value="L">L $60.00 USD</option>
+        <option value="XL">XL $60.00 USD</option>
+        <option value="XXL">XXL $60.00 USD</option>
         </select> </td></tr>
         </table>
         <input type="hidden" name="currency_code" value="USD" />
@@ -28,4 +28,3 @@ const FlannelForm = () => {
 }
 
 export default FlannelForm
-
