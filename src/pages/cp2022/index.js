@@ -12,7 +12,7 @@ const cp2022IndexPage = () => (
     <h2>Details</h2>
     <ul>
       <li>Where: Derrek VanLith's Apartment Building Party Room (200 University Ave SE, Minneapolis, MN)</li>
-      <li>When: December 10, 2022 5:30-10pm</li>
+      <li>When: December 10, 2022 5:30-9pm</li>
       <li>What: A chance to enjoy some brotherhood with some guests. We will have beer, wine, selzers, and hearty appetizers (all included in ticket price)</li>
       </ul>
     <h2>Purchase</h2>
