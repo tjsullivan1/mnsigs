@@ -99,9 +99,9 @@ const fy23FinIndexPage = () => (
           <td>Currently paid by Tim (Included in member donations below)</td>
         </tr>
         <tr>
-          <td><b>Total Expenses</b>></td>
-          <td>$2057</td>
-          <td>Currently paid by Tim (Included in member donations below)</td>
+          <td><b>Total Expenses</b></td>
+          <td><b>$2057</b></td>
+          <td></td>
         </tr>
       </tbody>
       <thead>
@@ -124,6 +124,11 @@ const fy23FinIndexPage = () => (
           <td>Member Donations</td>
           <td>$457</td>
           <td>This is not necessarily accurate, but is used to show what we need to break even.</td>
+        </tr>
+        <tr>
+          <td><b>Total Income</b></td>
+          <td><b>$2057</b></td>
+          <td></td>
         </tr>
       </tbody>
     </table>
