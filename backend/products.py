@@ -4,53 +4,29 @@ from models import Product
 # Sample product data for the storefront
 SAMPLE_PRODUCTS: List[Product] = [
     Product(
-        id="mnsigs-tshirt-navy",
-        name="MN Sigs Navy T-Shirt",
-        description="Classic navy blue t-shirt with MN Sigs logo. 100% cotton, comfortable fit.",
-        price=25.00,
-        currency="USD",
-        imageUrl="https://via.placeholder.com/300x300/1e3a8a/ffffff?text=MN+Sigs+Navy"
-    ),
-    Product(
-        id="mnsigs-tshirt-gray",
-        name="MN Sigs Gray T-Shirt", 
-        description="Heather gray t-shirt with vintage MN Sigs design. Soft cotton blend.",
-        price=25.00,
-        currency="USD",
-        imageUrl="https://via.placeholder.com/300x300/6b7280/ffffff?text=MN+Sigs+Gray"
-    ),
-    Product(
-        id="mnsigs-hoodie-black",
-        name="MN Sigs Black Hoodie",
-        description="Premium black hoodie with embroidered logo. Perfect for Minnesota winters.",
-        price=45.00,
+        id="mnsigs-meatloaf-ticket",
+        name="Meatloaf Meal Ticket",
+        description="Meat loaf with mashed potatoes and seasonal vegetables.",
+        price=40.00,
         currency="USD", 
-        imageUrl="https://via.placeholder.com/300x300/000000/ffffff?text=MN+Sigs+Hoodie"
+        imageUrl=""
     ),
     Product(
-        id="mnsigs-cap-red",
-        name="MN Sigs Red Cap",
-        description="Adjustable red baseball cap with MN Sigs embroidered logo.",
-        price=18.00,
-        currency="USD",
-        imageUrl="https://via.placeholder.com/300x300/dc2626/ffffff?text=MN+Sigs+Cap"
+        id="mnsigs-loin-ticket",
+        name="Pork Loin Meal Ticket",
+        description="Pork loin with rice pilaf and seasonal vegetables.",
+        price=40.00,
+        currency="USD",     
+        imageUrl=""
     ),
     Product(
-        id="mnsigs-sticker-pack",
-        name="MN Sigs Sticker Pack",
-        description="Pack of 5 weather-resistant vinyl stickers featuring various MN Sigs designs.",
-        price=8.00,
-        currency="USD",
-        imageUrl="https://via.placeholder.com/300x300/10b981/ffffff?text=Sticker+Pack"
+        id="mnsigs-special-ticket",
+        name="Special Request Meal Ticket",
+        description="If you have a dietary restriction, select this item and we will reach out with options.",
+        price=40.00,
+        currency="USD", 
+        imageUrl=""
     ),
-    Product(
-        id="mnsigs-mug-white",
-        name="MN Sigs Coffee Mug",
-        description="11oz ceramic coffee mug with MN Sigs logo. Dishwasher and microwave safe.",
-        price=15.00,
-        currency="USD",
-        imageUrl="https://via.placeholder.com/300x300/ffffff/000000?text=Coffee+Mug"
-    )
 ]
 
 def get_all_products() -> List[Product]:
