@@ -7,6 +7,7 @@ import type { Product } from '../types/product';
  */
 export async function fetchProducts(): Promise<Product[]> {
   try {
+    console.log('Testing url', API_BASE_URL);
     const response = await fetch(`${API_BASE_URL}/products`);
     
     if (!response.ok) {
