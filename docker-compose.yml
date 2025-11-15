@@ -1,0 +1,53 @@
+# Production Docker Compose for MN Sigs PayPal Storefront
+version: "3.8"
+
+services:
+  # Frontend React Application
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: http://localhost:8000
+        VITE_PAYPAL_CLIENT_ID: ${PAYPAL_CLIENT_ID}
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # Backend FastAPI Service  
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - PAYPAL_CLIENT_ID=${PAYPAL_CLIENT_ID}
+      - PAYPAL_CLIENT_SECRET=${PAYPAL_CLIENT_SECRET}
+      - PAYPAL_MODE=${PAYPAL_MODE:-sandbox}
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - DEBUG=false
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  app-network:
+    driver: bridge
+
+# To run:
+# 1. Copy .env.example to .env and configure your PayPal credentials
+# 2. Run: docker-compose up -d
+# 3. Visit: http://localhost:3000

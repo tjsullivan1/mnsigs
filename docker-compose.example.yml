@@ -1,5 +1,5 @@
-# Docker Compose Example for MN Sigs PayPal Storefront
-# This is a commented example showing how to deploy the frontend with a backend service
+# Docker Compose for MN Sigs PayPal Storefront
+# Complete frontend + backend deployment
 
 version: "3.8"
 
@@ -10,8 +10,8 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        # Backend API URL - adjust for your backend service
-        VITE_API_BASE_URL: http://backend:8000
+        # Backend API URL - points to backend service
+        VITE_API_BASE_URL: http://localhost:8000
         # PayPal Client ID - replace with your sandbox/production client ID
         VITE_PAYPAL_CLIENT_ID: REPLACE_WITH_YOUR_PAYPAL_CLIENT_ID
     ports:
@@ -19,43 +19,36 @@ services:
     depends_on:
       - backend
     environment:
-      # Additional runtime environment variables if needed
       - NODE_ENV=production
     networks:
       - app-network
 
-  # Backend Service (placeholder - implement your backend)
+  # Backend FastAPI Service
   backend:
-    # Replace with your actual backend image
-    image: my-backend-image:latest
-    # build:
-    #   context: ./backend
-    #   dockerfile: Dockerfile
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     environment:
-      # Backend environment variables
-      - DATABASE_URL=postgresql://user:password@db:5432/mystore
-      - PAYPAL_CLIENT_SECRET=your-paypal-client-secret
-      - NODE_ENV=production
-    depends_on:
-      - db
+      # PayPal Configuration
+      - PAYPAL_CLIENT_ID=REPLACE_WITH_YOUR_PAYPAL_CLIENT_ID
+      - PAYPAL_CLIENT_SECRET=REPLACE_WITH_YOUR_PAYPAL_CLIENT_SECRET
+      - PAYPAL_MODE=sandbox  # or 'live' for production
+      
+      # API Configuration
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - DEBUG=false
     networks:
       - app-network
-
-  # Database (example with PostgreSQL)
-  db:
-    image: postgres:15-alpine
-    environment:
-      POSTGRES_DB: mystore
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - app-network
-    ports:
-      - "5432:5432"
+    # Health check
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
 # Named volumes
 volumes:
