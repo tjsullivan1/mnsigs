@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/config.ts","./src/main.tsx","./src/api/checkout.ts","./src/api/products.ts","./src/components/CartSummary.tsx","./src/components/PayPalCheckoutButton.tsx","./src/components/ProductCard.tsx","./src/components/ProductList.tsx","./src/context/CartContext.tsx","./src/types/cart.ts","./src/types/product.ts"],"version":"5.9.3"}

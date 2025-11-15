@@ -1,0 +1,91 @@
+# Docker Compose Example for MN Sigs PayPal Storefront
+# This is a commented example showing how to deploy the frontend with a backend service
+
+version: "3.8"
+
+services:
+  # Frontend React Application
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Backend API URL - adjust for your backend service
+        VITE_API_BASE_URL: http://backend:8000
+        # PayPal Client ID - replace with your sandbox/production client ID
+        VITE_PAYPAL_CLIENT_ID: REPLACE_WITH_YOUR_PAYPAL_CLIENT_ID
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    environment:
+      # Additional runtime environment variables if needed
+      - NODE_ENV=production
+    networks:
+      - app-network
+
+  # Backend Service (placeholder - implement your backend)
+  backend:
+    # Replace with your actual backend image
+    image: my-backend-image:latest
+    # build:
+    #   context: ./backend
+    #   dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      # Backend environment variables
+      - DATABASE_URL=postgresql://user:password@db:5432/mystore
+      - PAYPAL_CLIENT_SECRET=your-paypal-client-secret
+      - NODE_ENV=production
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  # Database (example with PostgreSQL)
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: mystore
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    ports:
+      - "5432:5432"
+
+# Named volumes
+volumes:
+  postgres_data:
+
+# Networks
+networks:
+  app-network:
+    driver: bridge
+
+# Usage Instructions:
+# 1. Replace REPLACE_WITH_YOUR_PAYPAL_CLIENT_ID with your actual PayPal client ID
+# 2. Update my-backend-image:latest with your backend Docker image
+# 3. Adjust environment variables as needed for your setup
+# 4. Run: docker-compose up -d
+#
+# Development Usage:
+# - Use PayPal sandbox client ID for testing
+# - Set backend to development mode
+# - Consider using volume mounts for live code reloading
+#
+# Production Usage:
+# - Use production PayPal client ID
+# - Ensure all secrets are properly managed (consider Docker secrets)
+# - Add proper logging and monitoring
+# - Use production-grade database configuration
+# - Add SSL/TLS termination (nginx proxy, load balancer, etc.)
+#
+# Security Notes:
+# - Never commit real PayPal credentials to version control
+# - Use environment files (.env) for sensitive data
+# - Consider using Docker secrets for production deployments
+# - Implement proper CORS policies in your backend
