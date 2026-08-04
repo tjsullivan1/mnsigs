@@ -48,4 +48,4 @@ to pay your dues, please reach out to the treasurer.
 ## Get involved
 
 - [Learn more about Sigma Chi](https://www.sigmachi.org)
-- [Find an alumni chapter in your area](https://www.sigmachi.org/alumnichapters)
+- [Find an alumni chapter in your area](https://sigmachi.org/home/what-is-sigma-chi/alumni-groups/)
