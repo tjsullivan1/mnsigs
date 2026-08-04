@@ -21,9 +21,7 @@ const officers = (await getCollection("officers")).sort(
           {officer.data.name ? (
             <p>{officer.data.name}</p>
           ) : (
-            <p class="lead" style="font-size:1rem">
-              Position listing coming soon
-            </p>
+            <p class="officer-vacant">Position listing coming soon</p>
           )}
           {officer.data.email && (
             <p>

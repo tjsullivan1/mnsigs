@@ -1,74 +1,128 @@
 {
-    "routes": [
-      {
-        "route": "/profile",
-        "allowedRoles": ["authenticated"]
-      },
-      {
-        "route": "/admin/*",
-        "allowedRoles": ["administrator"]
-      },
-      {
-        "route": "/members/*",
-        "allowedRoles": ["member"]
-      },
-      {
-        "route": "/images/*",
-        "headers": {
-          "cache-control": "must-revalidate, max-age=15770000"
-        }
-      },
-      {
-        "route": "/api/*",
-        "methods": ["GET"],
-        "allowedRoles": ["registeredusers"]
-      },
-      {
-        "route": "/api/*",
-        "methods": ["PUT", "POST", "PATCH", "DELETE"],
-        "allowedRoles": ["administrator"]
-      },
-      {
-        "route": "/api/*",
-        "allowedRoles": ["authenticated"]
-      },
-      {
-        "route": "/login"
-      },
-      {
-        "route": "/logout",
-        "redirect": "/.auth/logout"
+  "$schema": "https://json.schemastore.org/staticwebapp.config.json",
+  "trailingSlash": "never",
+  "routes": [
+    {
+      "route": "/members/bylaws*",
+      "redirect": "/bylaws",
+      "statusCode": 301
+    },
+    {
+      "route": "/members*",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/members/*",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/financials*",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/financials/*",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/cp2021*",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/cp2021/*",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/cp2022*",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/cp2022/*",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/events*",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/events/*",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/shirts*",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/login*",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/logout*",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/profile*",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/admin*",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/admin/*",
+      "redirect": "/",
+      "statusCode": 301
+    },
+    {
+      "route": "/_astro/*",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
       }
-    ],
-    "responseOverrides": {
-      "400": {
-        "rewrite": "/invalid-invitation-error.html"
-      },
-      "401": {
-        "redirect": "/login",
-        "statusCode": 302
-      },
-      "403": {
-        "rewrite": "/custom-forbidden-page.html"
-      },
-      "404": {
-        "rewrite": "/404.html"
+    },
+    {
+      "route": "/favicon.ico",
+      "headers": {
+        "cache-control": "public, max-age=604800"
       }
     },
-    "globalHeaders": {
-      "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'"
-    },
-    "mimeTypes": {
-      ".json": "text/json"
-    },
-    "auth": {
-      "identityProviders": {
-        "google": {
-          "registration": {
-            "clientIdSettingName": "GOOGLE_CLIENT_ID",
-            "clientSecretSettingName": "GOOGLE_CLIENT_SECRET"
-          }
-        }
+    {
+      "route": "/logo.png",
+      "headers": {
+        "cache-control": "public, max-age=604800"
       }
     }
+  ],
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/404.html"
+    }
+  },
+  "globalHeaders": {
+    "content-security-policy": "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests",
+    "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+    "x-content-type-options": "nosniff",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "permissions-policy": "geolocation=(), microphone=(), camera=(), interest-cohort=()",
+    "cross-origin-opener-policy": "same-origin"
+  },
+  "mimeTypes": {
+    ".webp": "image/webp",
+    ".ico": "image/x-icon",
+    ".xml": "application/xml",
+    ".json": "application/json"
   }
+}

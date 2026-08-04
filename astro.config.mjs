@@ -8,7 +8,10 @@ export default defineConfig({
   trailingSlash: "never",
   integrations: [sitemap()],
   build: {
-    format: "file",
+    // "directory" emits /about/index.html, which Azure Static Web Apps serves
+    // at /about without an extension. "file" would emit /about.html and make
+    // the canonical URL disagree with the nav links and sitemap.
+    format: "directory",
   },
   image: {
     // Gallery photos live in Azure Blob Storage; Astro downloads and optimises

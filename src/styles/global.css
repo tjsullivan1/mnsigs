@@ -224,6 +224,10 @@ img {
   justify-content: space-between;
 }
 
+.site-footer__inner p {
+  margin: 0;
+}
+
 /* ---------- hero ---------- */
 
 .hero {
@@ -242,6 +246,18 @@ img {
   max-width: 38rem;
   margin-inline: auto;
   font-size: 1.15rem;
+  color: var(--color-muted);
+}
+
+.hero__actions {
+  margin-top: var(--space-lg);
+}
+
+.section--spaced {
+  margin-top: var(--space-xl);
+}
+
+.officer-vacant {
   color: var(--color-muted);
 }
 
