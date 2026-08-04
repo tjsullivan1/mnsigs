@@ -1,0 +1,48 @@
+---
+import Base from "../layouts/Base.astro"
+import { MAILING_LIST_URL } from "../config"
+---
+
+<Base>
+  <section class="hero container">
+    <img src="/logo.png" alt="" width="661" height="680" />
+    <h1>Welcome to the home of the Greater Minnesota Alumni Chapter</h1>
+    <p>
+      A chartered alumni chapter of the Sigma Chi Fraternity, serving brothers
+      across Greater Minnesota since 2019.
+    </p>
+    <p style="margin-top:2rem">
+      <a class="button" href={MAILING_LIST_URL}>Join our mailing list</a>
+      <a class="button button--ghost" href="/about">About the chapter</a>
+    </p>
+  </section>
+
+  <section class="container" style="margin-top:3.5rem">
+    <ul class="card-grid">
+      <li class="card">
+        <h3>Who we are</h3>
+        <p>
+          Founded in 2019 and chartered in 2021, we bring together Sigma Chi
+          alumni from across the state.
+        </p>
+        <p><a href="/about">Read our history &rarr;</a></p>
+      </li>
+      <li class="card">
+        <h3>Our officers</h3>
+        <p>
+          The chapter is led by six elected officers who keep our programs and
+          events running.
+        </p>
+        <p><a href="/officers">Meet the officers &rarr;</a></p>
+      </li>
+      <li class="card">
+        <h3>Our brothers</h3>
+        <p>
+          Photos from Grand Chapter, province conferences, and chapter events
+          through the years.
+        </p>
+        <p><a href="/gallery">View the gallery &rarr;</a></p>
+      </li>
+    </ul>
+  </section>
+</Base>

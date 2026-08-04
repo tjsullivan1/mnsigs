@@ -1,0 +1,19 @@
+---
+import { getEntry, render } from "astro:content"
+import Base from "../layouts/Base.astro"
+
+const entry = await getEntry("pages", "bylaws")
+if (!entry) throw new Error("Missing content: src/content/pages/bylaws.md")
+const { Content } = await render(entry)
+---
+
+<Base title={entry.data.title} description={entry.data.description}>
+  <div class="container">
+    <div class="prose document">
+      <h1 id="top">
+        Sigma Chi Fraternity's Greater Minnesota Alumni Chapter Bylaws
+      </h1>
+      <Content />
+    </div>
+  </div>
+</Base>

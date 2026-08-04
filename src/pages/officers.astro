@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content"
+import Page from "../layouts/Page.astro"
+
+const officers = (await getCollection("officers")).sort(
+  (a, b) => a.data.order - b.data.order,
+)
+---
+
+<Page
+  title="Our Officers"
+  description="The elected officers of the Greater Minnesota Alumni Chapter of the Sigma Chi Fraternity."
+  lead="The chapter is led by six elected officers."
+  wide
+>
+  <ul class="card-grid">
+    {
+      officers.map(officer => (
+        <li class="card">
+          <h3>{officer.data.office}</h3>
+          {officer.data.name ? (
+            <p>{officer.data.name}</p>
+          ) : (
+            <p class="lead" style="font-size:1rem">
+              Position listing coming soon
+            </p>
+          )}
+          {officer.data.email && (
+            <p>
+              <a href={`mailto:${officer.data.email}`}>{officer.data.email}</a>
+            </p>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</Page>

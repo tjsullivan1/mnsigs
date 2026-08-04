@@ -1,0 +1,45 @@
+---
+import Page from "../layouts/Page.astro"
+import { MAILING_LIST_URL, DONATE_URL } from "../config"
+---
+
+<Page
+  title="Contact the Chapter"
+  description="Get in touch with the Greater Minnesota Alumni Chapter of the Sigma Chi Fraternity."
+>
+  <h2>Join our mailing list</h2>
+  <p>
+    Chapter news, meeting notices, and event announcements go out over email. It
+    is the best way to keep up with what we are doing.
+  </p>
+  <p>
+    <a
+      class="button"
+      href={MAILING_LIST_URL}
+      target="_blank"
+      rel="noopener noreferrer">Sign up for chapter emails</a
+    >
+  </p>
+
+  <h2>Support the chapter</h2>
+  <p>
+    Monetary donations help fund our events and programs. Please note this is
+    <strong>not</strong> intended for dues payments — if you need to pay dues, please
+    reach out to the treasurer.
+  </p>
+  <p>
+    <a
+      class="button button--ghost"
+      href={DONATE_URL}
+      target="_blank"
+      rel="noopener noreferrer">Donate with PayPal</a
+    >
+  </p>
+
+  <h2>Reach an officer</h2>
+  <p>
+    Questions for a specific officer? See the <a href="/officers"
+      >officers page</a
+    >.
+  </p>
+</Page>
