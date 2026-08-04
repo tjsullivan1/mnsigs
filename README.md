@@ -27,6 +27,7 @@ npm run dev        # dev server at http://localhost:4321
 
 ```
 public/              static assets served as-is (logo, favicon)
+  staticwebapp.config.json  Azure SWA routing, redirects and headers
 src/
   config.ts          site metadata, nav links, external URLs
   content.config.ts  content collection schemas
@@ -39,8 +40,13 @@ src/
   pages/             one file per route
   styles/global.css  all site styling
 astro.config.mjs     Astro configuration
-staticwebapp.config.json  Azure Static Web Apps routing and headers
 ```
+
+`staticwebapp.config.json` lives in `public/` rather than the repo root on
+purpose. Azure only reads it from the root of the **deployed output**, so it has
+to be copied into `dist/` by the build. Both workflows assert it is there before
+deploying, because if it goes missing the redirects, headers and CSP silently
+stop applying rather than failing loudly.
 
 ## Editing content
 
@@ -77,6 +83,19 @@ be added to `image.domains` in `astro.config.mjs`.
 **Edit page copy** — the About, Privacy, and Bylaws pages are Markdown files in
 `src/content/pages/`. The bylaws use raw `<h2>`/`<h3>` tags so the original
 anchor IDs (`#article1`, `#a3s6`, and so on) keep working for existing links.
+
+## Deployment
+
+Pushing to `main` builds the site and deploys it to Azure Static Web Apps via
+`.github/workflows/deploy.yml`. Pull requests get their own staging environment,
+which is torn down when the PR closes.
+
+The build runs in GitHub Actions on Node 22 with `npm ci`, and the result is
+uploaded with `skip_app_build: true`, so the artifact that ships is exactly the
+one CI produced rather than a separate rebuild on Azure's side.
+
+`.github/workflows/ci.yml` runs formatting, type checking and a build on every
+pull request. CodeQL scanning runs on `main`, on pull requests, and weekly.
 
 ## Notes
 
