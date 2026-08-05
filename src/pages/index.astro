@@ -1,11 +1,21 @@
 ---
+import { Image } from "astro:assets"
 import Base from "../layouts/Base.astro"
 import { MAILING_LIST_URL } from "../config"
+import logo from "../assets/logo.png"
 ---
 
 <Base>
   <section class="hero container">
-    <img src="/logo.png" alt="" width="661" height="680" />
+    <Image
+      src={logo}
+      alt=""
+      width={171}
+      height={176}
+      densities={[1, 2]}
+      loading="eager"
+      fetchpriority="high"
+    />
     <h1>Welcome to the home of the Greater Minnesota Alumni Chapter</h1>
     <p>
       A chartered alumni chapter of the Sigma Chi Fraternity, serving brothers

@@ -26,9 +26,10 @@ npm run dev        # dev server at http://localhost:4321
 ## Project structure
 
 ```
-public/              static assets served as-is (logo, favicon)
+public/              served as-is, byte for byte (favicon.ico, robots.txt)
   staticwebapp.config.json  Azure SWA routing, redirects and headers
 src/
+  assets/            images processed at build time (logo, officer headshots)
   config.ts          site metadata, nav links, external URLs
   content.config.ts  content collection schemas
   content/
@@ -41,6 +42,12 @@ src/
   styles/global.css  all site styling
 astro.config.mjs     Astro configuration
 ```
+
+Put images in `src/assets/`, not `public/`. Anything in `public/` is copied
+verbatim and bypasses the image pipeline entirely, while `src/assets/` images go
+through `astro:assets` — resized, converted to WebP and content-hashed for
+immutable caching. The logo went from a 244 KB PNG on every page load to a
+1.6 KB WebP by making exactly that move.
 
 `staticwebapp.config.json` lives in `public/` rather than the repo root on
 purpose. Azure only reads it from the root of the **deployed output**, so it has

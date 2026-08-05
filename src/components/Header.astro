@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets"
 import { NAV_LINKS } from "../config"
+import logo from "../assets/logo.png"
 
 // Normalise so "/about" and "/about/" both match, and "/" stays "/"
 const current = Astro.url.pathname.replace(/\/+$/, "") || "/"
@@ -8,7 +10,14 @@ const current = Astro.url.pathname.replace(/\/+$/, "") || "/"
 <header class="site-header">
   <div class="container site-header__inner">
     <a class="brand" href="/">
-      <img src="/logo.png" alt="" width="661" height="680" />
+      <Image
+        src={logo}
+        alt=""
+        width={43}
+        height={44}
+        densities={[1, 2]}
+        loading="eager"
+      />
       <span>Greater Minnesota<br />Alumni Chapter</span>
     </a>
 
