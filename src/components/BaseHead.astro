@@ -1,5 +1,7 @@
 ---
+import { getImage } from "astro:assets"
 import { SITE } from "../config"
+import logo from "../assets/logo.png"
 
 interface Props {
   title?: string
@@ -10,7 +12,16 @@ const { title, description = SITE.description } = Astro.props
 
 const pageTitle = title ? `${title} | ${SITE.shortTitle}` : SITE.title
 const canonical = new URL(Astro.url.pathname, Astro.site).href
-const ogImage = new URL("/logo.png", Astro.site).href
+
+// These three stay PNG on purpose: apple-touch-icon has no WebP support, and
+// PNG is the safest format for social scrapers. They are still resized from the
+// 661px original, so none of them ship the full-size file. Sizes are kept
+// modest because the engraved loon is fine-grained detail that PNG compresses
+// poorly — it is the reason the original was 244 KB.
+const icon = await getImage({ src: logo, width: 96, format: "png" })
+const appleIcon = await getImage({ src: logo, width: 180, format: "png" })
+const og = await getImage({ src: logo, width: 400, format: "png" })
+const ogImage = new URL(og.src, Astro.site).href
 ---
 
 <meta charset="utf-8" />
@@ -20,8 +31,13 @@ const ogImage = new URL("/logo.png", Astro.site).href
 <link rel="canonical" href={canonical} />
 
 <link rel="icon" href="/favicon.ico" sizes="any" />
-<link rel="icon" href="/logo.png" type="image/png" />
-<link rel="apple-touch-icon" href="/logo.png" />
+<link
+  rel="icon"
+  href={icon.src}
+  type="image/png"
+  sizes={`${icon.attributes.width}x${icon.attributes.height}`}
+/>
+<link rel="apple-touch-icon" href={appleIcon.src} />
 <link rel="sitemap" href="/sitemap-index.xml" />
 
 <meta property="og:type" content="website" />
@@ -30,6 +46,9 @@ const ogImage = new URL("/logo.png", Astro.site).href
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content={String(og.attributes.width)} />
+<meta property="og:image:height" content={String(og.attributes.height)} />
+<meta property="og:image:alt" content={SITE.title} />
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content={pageTitle} />
