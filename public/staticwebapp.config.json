@@ -13,17 +13,7 @@
       "statusCode": 301
     },
     {
-      "route": "/members/*",
-      "redirect": "/",
-      "statusCode": 301
-    },
-    {
       "route": "/financials*",
-      "redirect": "/",
-      "statusCode": 301
-    },
-    {
-      "route": "/financials/*",
       "redirect": "/",
       "statusCode": 301
     },
@@ -33,27 +23,12 @@
       "statusCode": 301
     },
     {
-      "route": "/cp2021/*",
-      "redirect": "/",
-      "statusCode": 301
-    },
-    {
       "route": "/cp2022*",
       "redirect": "/",
       "statusCode": 301
     },
     {
-      "route": "/cp2022/*",
-      "redirect": "/",
-      "statusCode": 301
-    },
-    {
       "route": "/events*",
-      "redirect": "/",
-      "statusCode": 301
-    },
-    {
-      "route": "/events/*",
       "redirect": "/",
       "statusCode": 301
     },
@@ -79,11 +54,6 @@
     },
     {
       "route": "/admin*",
-      "redirect": "/",
-      "statusCode": 301
-    },
-    {
-      "route": "/admin/*",
       "redirect": "/",
       "statusCode": 301
     },

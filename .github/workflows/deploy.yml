@@ -53,7 +53,6 @@ jobs:
           action: upload
           app_location: dist
           skip_app_build: true
-          skip_api_build: true
 
   close_pull_request:
     name: Close pull request
