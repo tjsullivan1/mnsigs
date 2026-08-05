@@ -261,6 +261,28 @@ img {
   color: var(--color-muted);
 }
 
+/* Officer cards centre their headshot above the office/name.
+   Photos vary in source resolution, so a fixed square + object-fit
+   keeps every avatar the same size regardless of the original. */
+.officer {
+  text-align: center;
+}
+
+.officer__photo {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto var(--space-sm);
+  display: block;
+  border: 3px solid var(--color-gold);
+  background: var(--color-line);
+}
+
+.officer__name {
+  font-weight: 600;
+}
+
 /* ---------- buttons ---------- */
 
 .button {

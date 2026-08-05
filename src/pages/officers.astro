@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content"
+import { Image } from "astro:assets"
 import Page from "../layouts/Page.astro"
 
 const officers = (await getCollection("officers")).sort(
@@ -16,10 +17,20 @@ const officers = (await getCollection("officers")).sort(
   <ul class="card-grid">
     {
       officers.map(officer => (
-        <li class="card">
+        <li class="card officer">
+          {officer.data.photo && (
+            <Image
+              class="officer__photo"
+              src={officer.data.photo}
+              alt={`${officer.data.name}, ${officer.data.office}`}
+              width={256}
+              height={256}
+              loading="lazy"
+            />
+          )}
           <h3>{officer.data.office}</h3>
           {officer.data.name ? (
-            <p>{officer.data.name}</p>
+            <p class="officer__name">{officer.data.name}</p>
           ) : (
             <p class="officer-vacant">Position listing coming soon</p>
           )}
