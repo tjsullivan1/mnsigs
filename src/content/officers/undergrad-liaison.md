@@ -1,6 +1,7 @@
 ---
 office: Undergraduate Liaison
-name: null
+name: Todd Larson
 email: null
+photo: ../../assets/officers/todd-larson.jpg
 order: 6
 ---

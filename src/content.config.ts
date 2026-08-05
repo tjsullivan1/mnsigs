@@ -22,12 +22,14 @@ const gallery = defineCollection({
 
 const officers = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/officers" }),
-  schema: z.object({
-    office: z.string(),
-    name: z.string().nullable().default(null),
-    email: z.string().email().nullable().default(null),
-    order: z.number(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      office: z.string(),
+      name: z.string().nullable().default(null),
+      email: z.string().email().nullable().default(null),
+      photo: image().optional(),
+      order: z.number(),
+    }),
 })
 
 export const collections = { pages, gallery, officers }

@@ -1,6 +1,7 @@
 ---
 office: Treasurer
-name: null
+name: Dan Nelson
 email: null
+photo: ../../assets/officers/dan-nelson.jpg
 order: 4
 ---

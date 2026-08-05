@@ -1,6 +1,7 @@
 ---
 office: Vice President
-name: null
+name: DJ Gries
 email: null
+photo: ../../assets/officers/dj-gries.jpg
 order: 2
 ---
