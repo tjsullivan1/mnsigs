@@ -26,5 +26,8 @@
   "devDependencies": {
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1"
+  },
+  "overrides": {
+    "sharp": "^0.35.0"
   }
 }
