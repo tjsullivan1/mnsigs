@@ -7,6 +7,13 @@ export default defineConfig({
   site: "https://mnsigs.com",
   trailingSlash: "never",
   integrations: [sitemap()],
+  // Astro 7 changed this default to "jsx", which strips whitespace between
+  // elements using JSX rules. That silently removes rendered spaces between
+  // adjacent *inline* elements — e.g. the footer's `Privacy &middot; Sigma Chi`
+  // became `Privacy &middot;Sigma Chi`. Pinning to the previous HTML-aware
+  // behaviour keeps this upgrade a pure dependency change. Switching to "jsx"
+  // is a separate, deliberate decision.
+  compressHTML: true,
   build: {
     // "directory" emits /about/index.html, which Azure Static Web Apps serves
     // at /about without an extension. "file" would emit /about.html and make

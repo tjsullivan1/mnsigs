@@ -1,4 +1,5 @@
-import { defineCollection, z } from "astro:content"
+import { defineCollection } from "astro:content"
+import { z } from "astro/zod"
 import { glob } from "astro/loaders"
 
 const pages = defineCollection({
@@ -15,7 +16,7 @@ const gallery = defineCollection({
   schema: z.object({
     caption: z.string(),
     alt: z.string(),
-    src: z.string().url(),
+    src: z.url(),
     order: z.number(),
   }),
 })
@@ -26,7 +27,7 @@ const officers = defineCollection({
     z.object({
       office: z.string(),
       name: z.string().nullable().default(null),
-      email: z.string().email().nullable().default(null),
+      email: z.email().nullable().default(null),
       photo: image().optional(),
       order: z.number(),
     }),
