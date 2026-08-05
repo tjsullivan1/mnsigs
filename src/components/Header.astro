@@ -1,0 +1,32 @@
+---
+import { NAV_LINKS } from "../config"
+
+// Normalise so "/about" and "/about/" both match, and "/" stays "/"
+const current = Astro.url.pathname.replace(/\/+$/, "") || "/"
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="/">
+      <img src="/logo.png" alt="" width="661" height="680" />
+      <span>Greater Minnesota<br />Alumni Chapter</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        {
+          NAV_LINKS.map(link => (
+            <li>
+              <a
+                href={link.href}
+                aria-current={link.href === current ? "page" : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

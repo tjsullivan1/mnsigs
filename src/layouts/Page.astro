@@ -1,0 +1,22 @@
+---
+import Base from "./Base.astro"
+
+interface Props {
+  title: string
+  description?: string
+  lead?: string
+  wide?: boolean
+}
+
+const { title, description, lead, wide = false } = Astro.props
+---
+
+<Base title={title} description={description}>
+  <div class="container">
+    <div class={wide ? "" : "prose"}>
+      <h1>{title}</h1>
+      {lead && <p class="lead">{lead}</p>}
+      <slot />
+    </div>
+  </div>
+</Base>

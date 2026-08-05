@@ -1,0 +1,66 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches: [main]
+
+# A newer commit supersedes an in-flight deploy for the same branch or PR.
+concurrency:
+  group: deploy-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build_and_deploy:
+    name: Build and deploy
+    if: github.event_name == 'push' || github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write # the SWA action comments the preview URL on PRs
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Build here rather than letting Oryx do it, so the artifact that ships is
+      # the one produced by this pinned Node version and the committed lockfile.
+      - name: Build
+        run: npm run build
+
+      # staticwebapp.config.json is only honoured when it sits in the root of the
+      # deployed output. It lives in public/ so Astro copies it into dist/; if that
+      # ever regresses, every redirect, header and the CSP silently stop applying.
+      - name: Verify SWA config is in the build output
+        run: test -f dist/staticwebapp.config.json
+
+      - name: Deploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WITTY_DUNE_0A6A7D710 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: upload
+          app_location: dist
+          skip_app_build: true
+
+  close_pull_request:
+    name: Close pull request
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tear down the staging environment
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WITTY_DUNE_0A6A7D710 }}
+          action: close
