@@ -1,0 +1,90 @@
+---
+import type { CollectionEntry } from "astro:content"
+import { Image } from "astro:assets"
+
+type Role = CollectionEntry<"provinceRoles">
+
+interface Props {
+  node: Role
+  childrenById: Map<string, Role[]>
+  roleById: Map<string, Role>
+  chapterNames: Map<string, string>
+  /** Chapter of the node above this one, so a chapter is only labelled once. */
+  parentChapterId?: string | null
+}
+
+const {
+  node,
+  childrenById,
+  roleById,
+  chapterNames,
+  parentChapterId = null,
+} = Astro.props
+
+const children = childrenById.get(node.id) ?? []
+const chapterId = node.data.chapter?.id ?? null
+const showChapter = chapterId !== null && chapterId !== parentChapterId
+
+// Dotted lines are advisory, not reporting, so they are described in words on
+// the node itself; the matrix below the tree shows the same data as a grid.
+const advisedChapters = node.data.advises
+  .map(ref => roleById.get(ref.id)?.data.chapter?.id)
+  .filter((id): id is string => Boolean(id))
+  .map(id => chapterNames.get(id))
+  .filter((name): name is string => Boolean(name))
+---
+
+<li class="org-node">
+  <div class="org-card">
+    {
+      node.data.photo && node.data.person && (
+        <Image
+          class="org-card__photo"
+          src={node.data.photo}
+          alt={`${node.data.person}, ${node.data.title}`}
+          width={128}
+          height={128}
+          loading="lazy"
+        />
+      )
+    }
+    <p class="org-card__title">{node.data.title}</p>
+    {
+      showChapter && (
+        <p class="org-card__scope">{chapterNames.get(chapterId!)}</p>
+      )
+    }
+    {node.data.person && <p class="org-card__person">{node.data.person}</p>}
+    {
+      node.data.email && (
+        <p class="org-card__email">
+          <a href={`mailto:${node.data.email}`}>{node.data.email}</a>
+        </p>
+      )
+    }
+    {node.data.termLabel && <p class="org-card__term">{node.data.termLabel}</p>}
+    {
+      advisedChapters.length > 0 && (
+        <p class="org-card__dotted">
+          Advises the chapter advisors of {advisedChapters.join(", ")}.
+        </p>
+      )
+    }
+    {node.data.summary && <p class="org-card__summary">{node.data.summary}</p>}
+  </div>
+  {
+    children.length > 0 && (
+      <ul class="org-branch">
+        {children.map(child => (
+          <Astro.self
+            node={child}
+            childrenById={childrenById}
+            roleById={roleById}
+            chapterNames={chapterNames}
+            parentChapterId={chapterId}
+          />
+        ))}
+      </ul>
+    )
+  }
+</li>
