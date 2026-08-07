@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content"
 import Page from "../../layouts/Page.astro"
 import OrgNode from "../../components/OrgNode.astro"
-import OrgCard from "../../components/OrgCard.astro"
 
 const chapters = (await getCollection("chapters")).sort(
   (a, b) => a.data.order - b.data.order,
@@ -89,15 +88,6 @@ if (orphans.length > 0) {
   )
 }
 
-// The top of the chart is not a uniform tree: the Grand Praetor's direct
-// reports are either province-wide roles (which read as a staff branch hanging
-// off the stem) or the five chapter advisors (which are peers and are drawn as
-// a row). Splitting them here keeps that distinction out of the recursive
-// component, which handles the uniform subtrees below.
-const rootChildren = childrenById.get(root.id) ?? []
-const staffRoles = rootChildren.filter(r => r.data.scope === "province")
-const chapterLine = rootChildren.filter(r => r.data.scope === "chapter")
-
 // Overlay roles are the ones with dotted lines: appointed by the Grand Praetor
 // but working with every chapter.
 const overlayRoles = roles.filter(role => role.data.advises.length > 0)
@@ -147,38 +137,13 @@ const headTableByChapter = new Map(
 
   <section class="section--spaced" aria-labelledby="reporting">
     <h2 id="reporting">Reporting structure</h2>
-    <ul class="org-tree org-chart">
-      <li class="org-node org-node--root">
-        <OrgCard node={root} roleById={roleById} chapterNames={chapterNames} />
-        {
-          staffRoles.length > 0 && (
-            <ul class="org-branch org-branch--staff">
-              {staffRoles.map(child => (
-                <OrgNode
-                  node={child}
-                  childrenById={childrenById}
-                  roleById={roleById}
-                  chapterNames={chapterNames}
-                />
-              ))}
-            </ul>
-          )
-        }
-        {
-          chapterLine.length > 0 && (
-            <ul class="org-branch org-branch--row">
-              {chapterLine.map(child => (
-                <OrgNode
-                  node={child}
-                  childrenById={childrenById}
-                  roleById={roleById}
-                  chapterNames={chapterNames}
-                />
-              ))}
-            </ul>
-          )
-        }
-      </li>
+    <ul class="org-tree">
+      <OrgNode
+        node={root}
+        childrenById={childrenById}
+        roleById={roleById}
+        chapterNames={chapterNames}
+      />
     </ul>
   </section>
 
