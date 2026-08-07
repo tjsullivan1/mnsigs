@@ -9,7 +9,14 @@ export const SITE = {
 
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+  {
+    label: "About",
+    href: "/about",
+    children: [
+      { label: "About the Chapter", href: "/about" },
+      { label: "Province Structure", href: "/about/province" },
+    ],
+  },
   { label: "Officers", href: "/officers" },
   { label: "Gallery", href: "/gallery" },
   { label: "Bylaws", href: "/bylaws" },

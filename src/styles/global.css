@@ -198,6 +198,69 @@ img {
   border-bottom-color: var(--color-blue);
 }
 
+/* Parent of the open page: highlighted, but aria-current stays on the child. */
+.site-nav a.is-ancestor {
+  color: var(--color-blue);
+}
+
+/* The About submenu is always in the DOM and revealed with :hover/:focus-within,
+   so it needs no JavaScript and remains keyboard reachable. On narrow screens
+   the hover affordance is unreliable, so it simply renders as an indented list. */
+.site-nav .has-submenu {
+  position: relative;
+}
+
+.site-nav__submenu {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 var(--space-md);
+}
+
+.site-nav__submenu a {
+  font-weight: 400;
+  font-size: 0.925rem;
+  color: var(--color-muted);
+}
+
+@media (min-width: 46rem) {
+  .site-nav__submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    min-width: 13rem;
+    padding: var(--space-xs) 0;
+    background: var(--color-bg);
+    border: 1px solid var(--color-line);
+    border-top: 3px solid var(--color-gold);
+    border-radius: 4px;
+    box-shadow: 0 6px 16px rgb(0 0 0 / 8%);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .site-nav .has-submenu:hover .site-nav__submenu,
+  .site-nav .has-submenu:focus-within .site-nav__submenu {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .site-nav__submenu a {
+    padding: 0.35rem var(--space-md);
+    border-bottom: 0;
+    white-space: nowrap;
+  }
+
+  .site-nav__submenu a:hover,
+  .site-nav__submenu a:focus-visible {
+    background: var(--color-bg-soft);
+    color: var(--color-blue);
+  }
+}
+
 /* ---------- main / footer ---------- */
 
 .site-main {
@@ -456,6 +519,145 @@ th {
 
 .toc ol {
   margin-bottom: 0;
+}
+
+/* ---------- org chart ---------- */
+
+/* The reporting hierarchy is a nested list so it stays meaningful to screen
+   readers and in print; the connector lines are decorative CSS only. */
+.org-tree,
+.org-branch {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.org-branch {
+  margin-left: 1rem;
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--color-line);
+}
+
+.org-node {
+  position: relative;
+  margin-top: var(--space-sm);
+}
+
+.org-branch > .org-node::before {
+  content: "";
+  position: absolute;
+  left: -1.5rem;
+  top: 1.15rem;
+  width: 1.5rem;
+  height: 1px;
+  background: var(--color-line);
+}
+
+/* Hide the parent's vertical rule below the final connector so the line stops
+   at the last sibling instead of running past it. */
+.org-branch > .org-node:last-child::after {
+  content: "";
+  position: absolute;
+  left: calc(-1.5rem - 1px);
+  top: calc(1.15rem + 1px);
+  bottom: -1px;
+  width: 1px;
+  background: var(--color-bg);
+}
+
+.org-card {
+  max-width: 34rem;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-line);
+  border-left: 3px solid var(--color-blue);
+  border-radius: 4px;
+  background: var(--color-bg);
+}
+
+.org-card > p {
+  margin: 0;
+}
+
+.org-card__title {
+  font-weight: 600;
+  color: var(--color-blue);
+}
+
+.org-card__scope {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.org-card__person {
+  font-weight: 500;
+}
+
+.org-card__email,
+.org-card__term {
+  font-size: 0.9rem;
+}
+
+.org-card__summary {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+/* Dotted borders mirror the dotted lines these roles have on the chart. */
+.org-card__dotted {
+  padding-left: var(--space-sm);
+  border-left: 2px dotted var(--color-gold);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--color-muted);
+}
+
+/* Two class selectors outrank the `.org-card > p` reset above, so these get
+   their breathing room back without needing !important. */
+.org-card > .org-card__summary,
+.org-card > .org-card__dotted {
+  margin-top: var(--space-xs);
+}
+
+.org-card__photo {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+  float: right;
+  margin-left: var(--space-sm);
+  border: 2px solid var(--color-gold);
+}
+
+/* `position: relative` is load-bearing: the matrix cells contain
+   .visually-hidden spans, which are absolutely positioned. Without a positioned
+   ancestor they resolve against the document, escape this container's clipping,
+   and stretch the whole page to the table's full width on narrow screens. */
+.table-scroll {
+  position: relative;
+  overflow-x: auto;
+}
+
+.org-matrix td {
+  text-align: center;
+  color: var(--color-blue);
+}
+
+.org-matrix th[scope="row"] {
+  background: transparent;
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.chapter__institution {
+  font-weight: 500;
+}
+
+.chapter__meta {
+  font-size: 0.9rem;
+  color: var(--color-muted);
 }
 
 /* ---------- utilities ---------- */

@@ -24,16 +24,39 @@ const current = Astro.url.pathname.replace(/\/+$/, "") || "/"
     <nav class="site-nav" aria-label="Main">
       <ul>
         {
-          NAV_LINKS.map(link => (
-            <li>
-              <a
-                href={link.href}
-                aria-current={link.href === current ? "page" : undefined}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))
+          NAV_LINKS.map(link => {
+            const children = "children" in link ? link.children : undefined
+            // A parent whose child route is open is highlighted but must not
+            // claim aria-current="page" — that belongs to the child link.
+            const childActive = children?.some(child => child.href === current)
+            return (
+              <li class={children ? "has-submenu" : undefined}>
+                <a
+                  href={link.href}
+                  aria-current={link.href === current ? "page" : undefined}
+                  class={childActive ? "is-ancestor" : undefined}
+                >
+                  {link.label}
+                </a>
+                {children && (
+                  <ul class="site-nav__submenu">
+                    {children.map(child => (
+                      <li>
+                        <a
+                          href={child.href}
+                          aria-current={
+                            child.href === current ? "page" : undefined
+                          }
+                        >
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            )
+          })
         }
       </ul>
     </nav>
