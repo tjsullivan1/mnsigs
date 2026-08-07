@@ -565,6 +565,12 @@ th {
   background: var(--color-bg);
 }
 
+/* The staff branch is always followed by the chapter branch on the same stem,
+   so masking its tail would punch a gap in a line that does continue. */
+.org-branch--staff > .org-node:last-child::after {
+  display: none;
+}
+
 .org-card {
   max-width: 34rem;
   padding: var(--space-sm) var(--space-md);
@@ -658,6 +664,144 @@ th {
 .chapter__meta {
   font-size: 0.9rem;
   color: var(--color-muted);
+}
+
+/* ---------- org chart: wide-screen layout ----------
+
+   Up to 64rem the chart is the indented list above, which is the only thing
+   that fits on a phone. From 64rem the five chapters become a centred row,
+   because they are peers and a vertical list of them reads as a ranking.
+   Everything below that row stays a vertical list: the deepest level is 20
+   nodes wide, which as columns would be ~60px each. */
+
+@media (min-width: 64rem) {
+  .org-chart {
+    --org-stem: 1.5rem;
+  }
+
+  .org-chart > .org-node--root > .org-card {
+    max-width: 24rem;
+    margin-inline: auto;
+    border-left-width: 1px;
+    border-top: 3px solid var(--color-blue);
+    text-align: center;
+  }
+
+  /* Province-wide roles hang off the centre stem as a staff branch rather than
+     sitting in the chapter row, so they don't read as a sixth chapter. */
+  .org-chart > .org-node--root > .org-branch--staff {
+    width: 50%;
+    margin-left: calc(50% - 0.5px);
+    padding-left: var(--org-stem);
+  }
+
+  /* This branch continues down into the chapter row below it; see the rule
+     outside this media query that suppresses its end-of-branch mask. */
+
+  .org-branch--row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: 0;
+    padding-left: 0;
+    padding-top: calc(var(--org-stem) * 2);
+    border-left: 0;
+    position: relative;
+  }
+
+  /* Stem from the card above down to the horizontal rail. */
+  .org-branch--row::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: calc(50% - 0.5px);
+    width: 1px;
+    height: var(--org-stem);
+    background: var(--color-line);
+  }
+
+  .org-branch--row > .org-node {
+    flex: 1 1 0;
+    min-width: 0;
+    position: relative;
+    margin-top: 0;
+    padding-top: var(--org-stem);
+    /* Spacing is padding rather than flex gap so the rail drawn across each
+       item's top edge joins up into one continuous line. */
+    padding-inline: var(--space-xs);
+  }
+
+  /* The rail is drawn per item and trimmed to the centre of the first and last,
+     which avoids having to know the column width up front. */
+  .org-branch--row > .org-node::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 1px;
+    background: var(--color-line);
+  }
+
+  .org-branch--row > .org-node:first-child::before {
+    left: calc(50% - 0.5px);
+  }
+
+  .org-branch--row > .org-node:last-child::before {
+    right: calc(50% - 0.5px);
+  }
+
+  /* Drop from the rail into each chapter's card. */
+  .org-branch--row > .org-node::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: calc(50% - 0.5px);
+    bottom: auto;
+    width: 1px;
+    height: var(--org-stem);
+    background: var(--color-line);
+  }
+
+  /* The base rule paints a background-coloured mask on the last item of a
+     branch to stop the vertical rule overrunning. In this row that selector is
+     more specific than the drop stub above, so it has to be restated. */
+  .org-branch--row > .org-node:last-child::after {
+    top: 0;
+    bottom: auto;
+    left: calc(50% - 0.5px);
+    width: 1px;
+    height: var(--org-stem);
+    background: var(--color-line);
+  }
+
+  .org-branch--row > .org-node > .org-card {
+    max-width: none;
+    border-left-width: 1px;
+    border-top: 3px solid var(--color-gold);
+  }
+
+  /* In the row the chapter is the column's identity, so it leads the card. */
+  .org-branch--row > .org-node > .org-card > .org-card__scope {
+    font-size: 0.95rem;
+    color: var(--color-blue);
+  }
+
+  /* Inside a column there is much less room, so the nested list tightens up. */
+  .org-branch--row .org-branch {
+    margin-left: 0.5rem;
+    padding-left: 0.75rem;
+  }
+
+  .org-branch--row .org-branch > .org-node::before {
+    left: -0.75rem;
+    width: 0.75rem;
+  }
+
+  .org-branch--row .org-branch > .org-node:last-child::after {
+    left: calc(-0.75rem - 1px);
+  }
 }
 
 /* ---------- utilities ---------- */
