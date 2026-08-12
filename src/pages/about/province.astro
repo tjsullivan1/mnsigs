@@ -1,0 +1,257 @@
+---
+import { getCollection } from "astro:content"
+import Page from "../../layouts/Page.astro"
+import OrgNode from "../../components/OrgNode.astro"
+
+const chapters = (await getCollection("chapters")).sort(
+  (a, b) => a.data.order - b.data.order,
+)
+const roles = (await getCollection("provinceRoles")).sort(
+  (a, b) => a.data.order - b.data.order,
+)
+
+const chapterNames = new Map(chapters.map(c => [c.id, c.data.designation]))
+const roleById = new Map(roles.map(r => [r.id, r]))
+
+// Astro's reference() checks the *shape* of a reference but does not fail the
+// build when the target is missing, so a typo would silently drop a node or a
+// dotted line from the chart. These checks turn that into a build failure.
+for (const role of roles) {
+  const where = `src/content/province-roles/${role.id}.md`
+
+  const parentId = role.data.reportsTo?.id
+  if (parentId && !roleById.has(parentId)) {
+    throw new Error(`${where}: reportsTo "${parentId}" is not a province role.`)
+  }
+  if (parentId === role.id) {
+    throw new Error(`${where}: reportsTo points at itself.`)
+  }
+
+  const chapterId = role.data.chapter?.id
+  if (chapterId && !chapterNames.has(chapterId)) {
+    throw new Error(`${where}: chapter "${chapterId}" is not a chapter.`)
+  }
+  if (role.data.scope === "chapter" && !chapterId) {
+    throw new Error(`${where}: scope is "chapter" but no chapter is set.`)
+  }
+
+  for (const ref of role.data.advises) {
+    const target = roleById.get(ref.id)
+    if (!target) {
+      throw new Error(
+        `${where}: advises "${ref.id}", which is not a province role.`,
+      )
+    }
+    // The chart labels dotted lines by chapter, so an advised role that has no
+    // chapter would render as a blank entry in that list.
+    if (!target.data.chapter) {
+      throw new Error(
+        `${where}: advises "${ref.id}", which has no chapter to label it with.`,
+      )
+    }
+  }
+}
+
+// Group by reporting line once, so the recursive component is a pure lookup
+// rather than re-scanning every role at each level.
+const childrenById = new Map<string, typeof roles>()
+for (const role of roles) {
+  const parent = role.data.reportsTo?.id
+  if (!parent) continue
+  const siblings = childrenById.get(parent) ?? []
+  siblings.push(role)
+  childrenById.set(parent, siblings)
+}
+
+const roots = roles.filter(role => !role.data.reportsTo)
+if (roots.length !== 1) {
+  throw new Error(
+    `Expected exactly one province role without "reportsTo"; found ${roots.length}.`,
+  )
+}
+const root = roots[0]
+
+// Every role must hang off the root. A cycle in reportsTo leaves its members
+// unreachable, so this catches that too, and guarantees the recursive render
+// below visits each role exactly once.
+const reachable = new Set<string>()
+const walk = (id: string) => {
+  if (reachable.has(id)) return
+  reachable.add(id)
+  for (const child of childrenById.get(id) ?? []) walk(child.id)
+}
+walk(root.id)
+const orphans = roles.filter(r => !reachable.has(r.id)).map(r => r.id)
+if (orphans.length > 0) {
+  throw new Error(
+    `These province roles never reach the top of the chart (broken or circular reportsTo): ${orphans.join(", ")}.`,
+  )
+}
+
+// Overlay roles are the ones with dotted lines: appointed by the Grand Praetor
+// but working with every chapter.
+const overlayRoles = roles.filter(role => role.data.advises.length > 0)
+const advisedChapterIds = new Map(
+  overlayRoles.map(role => [
+    role.id,
+    new Set(
+      role.data.advises
+        .map(ref => roleById.get(ref.id)?.data.chapter?.id)
+        .filter((id): id is string => Boolean(id)),
+    ),
+  ]),
+)
+
+const advisorByChapter = new Map(
+  roles
+    .filter(r => r.data.title === "Chapter Advisor" && r.data.chapter)
+    .map(r => [r.data.chapter!.id, r]),
+)
+
+const headTableByChapter = new Map(
+  chapters.map(c => [
+    c.id,
+    roles.filter(
+      r =>
+        r.data.chapter?.id === c.id &&
+        r.data.reportsTo?.id === advisorByChapter.get(c.id)?.id &&
+        r.data.title !== "Chapter Advisory Board",
+    ),
+  ]),
+)
+---
+
+<Page
+  title="Province Structure"
+  description="How the Greater Minnesota Alumni Chapter fits within the North Central Province of the Sigma Chi Fraternity, including its chapters, advisors, and mentors."
+  lead="The North Central Province is led by a Grand Praetor and comprises five undergraduate chapters across Minnesota and North Dakota."
+  wide
+>
+  <p class="prose">
+    This chart shows <strong>positions, not people</strong>. Reporting lines are
+    shown as a hierarchy; advisory relationships that cross those lines — the
+    Ritual Peers and Foundational Leadership Certificate Mentors, who are
+    appointed by the Grand Praetor but work with every chapter — are shown in
+    the matrix below.
+  </p>
+
+  <section class="section--spaced" aria-labelledby="reporting">
+    <h2 id="reporting">Reporting structure</h2>
+    <ul class="org-tree">
+      <OrgNode
+        node={root}
+        childrenById={childrenById}
+        roleById={roleById}
+        chapterNames={chapterNames}
+      />
+    </ul>
+  </section>
+
+  <section class="section--spaced" aria-labelledby="overlay">
+    <h2 id="overlay">Province-wide mentor roles</h2>
+    <p class="prose">
+      These roles report to the Grand Praetor and support each chapter alongside
+      its chapter advisor.
+    </p>
+    <div class="table-scroll">
+      <table class="org-matrix">
+        <caption class="visually-hidden">
+          Province-wide mentor roles and the chapters they support
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Role</th>
+            {chapters.map(c => <th scope="col">{c.data.designation}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {
+            overlayRoles.map(role => (
+              <tr>
+                <th scope="row">{role.data.title}</th>
+                {chapters.map(c => (
+                  <td>
+                    {advisedChapterIds.get(role.id)?.has(c.id) ? (
+                      <>
+                        <span aria-hidden="true">●</span>
+                        <span class="visually-hidden">
+                          Supports {c.data.designation}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <span aria-hidden="true">—</span>
+                        <span class="visually-hidden">
+                          Does not support {c.data.designation}
+                        </span>
+                      </>
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section--spaced" aria-labelledby="chapters">
+    <h2 id="chapters">Chapters of the province</h2>
+    <ul class="card-grid">
+      {
+        chapters.map(c => (
+          <li class="card">
+            <h3>{c.data.designation}</h3>
+            <p class="chapter__institution">{c.data.institution}</p>
+            <p class="chapter__meta">
+              {c.data.city}, {c.data.state} &middot; Chartered{" "}
+              {c.data.chartered}
+            </p>
+            <p class="chapter__meta">
+              Head table:{" "}
+              {headTableByChapter
+                .get(c.id)
+                ?.map(r => r.data.title)
+                .join(", ")}
+            </p>
+            {c.data.website && (
+              <p>
+                <a
+                  href={c.data.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Chapter website
+                </a>
+              </p>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section--spaced prose" aria-labelledby="notes">
+    <h2 id="notes">Notes</h2>
+    <ul>
+      <li>
+        A <strong>Chapter Advisory Board</strong> is the group of alumni volunteers
+        who advise a chapter. It is distinct from a
+        <strong>house corporation</strong>, which is a separate legal entity
+        responsible for chapter property.
+      </li>
+      <li>
+        <strong>Consul</strong>, <strong>Pro Consul</strong> and
+        <strong>Annotator</strong> are the chapter president, vice president and secretary
+        respectively. These are undergraduate offices that turn over each year, so
+        they are listed here as positions only.
+      </li>
+      <li>
+        Our chapter's <a href="/bylaws#a4s8">Undergraduate Liaison</a> is the current
+        Grand Praetor of the North Central Province, which is how the alumni chapter
+        connects to the structure above.
+      </li>
+    </ul>
+  </section>
+</Page>
